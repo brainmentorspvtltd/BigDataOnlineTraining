@@ -1,0 +1,4 @@
+This is python programming
+Hadoop Implementation with python
+Python is used everywhere now a days
+Hadoop is a framework

@@ -1,0 +1,50 @@
+MapReduce Framework	-: Parallel Distributed Fault Tolerence Processing Framework
+
+data.txt	=> emp_id, emp_name, emp_age, emp_dept, emp_sal, emp_exp..... 	=> 200mb
+
+B1 (Block_1)		=> 		128mb	=> Mapper_1	=> 4000
+B2 (Block_2)		=>		72mb	=> Mapper_2	=> 2000
+
+1. Map Class and implement Map method
+
+	a. Get/read the data from the input file		=> InputFormat
+	b. Business Logic (build by Developer)
+	c. Write the output (build by Developer)
+
+	Temporary/Intermediate	=> It is written to the machine where mapper run
+
+YARN will create multiple instances of mappers and run on each block in parallel
+- MapReduce Framework will collect all the output from mappers and gives to the reducer
+
+2. Reduce class and implement Reduce method
+	a. Gets/Read all the data from mappers
+	b. Aggregation/Consolidation (Build by developer)
+	c. Write the output (Build by developer)
+	
+	Final Ouput 	=> HDFS 		=> Block + Repl
+
+By default InputFormat Class in MapReduce has a TextInputFormat Class
+
+MapperInput			=> InputFormat
+MapperOutput		=> Developer
+ReducerInput		=> Same as Mapper output
+ReducerOutput		=> Developer
+
+
+WordCount
+sample.txt	200mb
+
+b1	data - 128mb
+hello this is online training of hadoop		(CR/New_Line)
+python is a type of programming language	(CR/New_Line)
+
+b2	data - 72mb
+this is ravi from brain mentors
+i am a data scientist and this training is about big data
+
+TextInputFormat Class generate key:value pair to mappers
+key: 	BytesOffset
+value:	Entire Line
+
+0 : hello this is online training of hadoop
+39 : python is a type of programming language
