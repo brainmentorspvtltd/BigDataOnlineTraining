@@ -1,0 +1,82 @@
+HBase
+- Open source, distributed database, developed by Apache...
+- Written on Java
+- can store data from terabytes to petabytes
+
+Unique Features:
+- Built for low latency operations...
+- Stores large amount of data in terms of table
+
+Hbase is column-oriented database and data is stored in tables.
+Tables are sorted by RowId
+
+KeyTerms:
+- Table      		 => Collection of rows present
+- Row  			 => Collection of column families
+- Column Family	 => Collection of column
+- Column		 => Collection of key:value pairs
+- Namespace		 => Logical grouping of tables
+- Cell			 => A tuple exactly specifies a cell definition in HBase
+
+Column-oriented Database 
+=>Online Analytical Processing
+=> the amount of data that can able to store in this model is very huge like in petabytes
+Row-oriented Database	 
+=> Online Transactional Process
+=> small number of rows and columns
+
+
+
+
+What HBase Consist of..?
+- Set of tables.
+- Each table with column families.
+- Each table must have an elements as Primary Key.
+- Row acts as a Primary Key in HBase.
+- Any access to HBase tables uses this Primary Key
+- Each column present in HBase denotes attribute corresponding to object
+
+
+
+Major Components of HBase:
+- HMaster
+- HRegionserver
+- HRegions
+- Zookeeper
+
+HMaster Role:
+- plays imp role in terms of performance and maintaining nodes in cluster
+- assigns regions to region servers
+- When a client wants to change a schema and to change metadata operations, HMaster takes responibility
+
+Methods exposed by HMaster:
+Table => create, remove, enable, disable
+ColumnFamily => add, modify
+Region => move, assign
+
+HRegionServers:
+- Hosting and managing regions
+- Splitting regions automatically
+- Handling read and write requests
+- Communicating with the client directly
+
+
+HRegions:
+Basic Building elements of HBase cluster that consists of the distribution of tables an comprised of
+column families.
+It has two major components -: MemStore and HFile
+
+MemStore :
+- Memstore for each store for each region for the table
+- it sorts data before flusing into HFiles
+- Write and read performance will increase because of sorting
+
+ZooKeeper
+- if the client wants to communicate with regions, the server client has to approach zookeeper first.
+
+
+Services Provided by Zookeeper
+- Maintains configuration info.
+- Provided distributed synch.
+- Client Communication establishment with region servers
+- To track server failure and network partitions
