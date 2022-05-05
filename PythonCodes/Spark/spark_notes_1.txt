@@ -1,0 +1,62 @@
+Spark
+- Swift Processing
+  - high data processing speed of about 100 times faster in memory and 10 times faster on disk.
+- Dynamic in Nature
+  - develop parallel application
+- In-Memory Computation
+  - to increase the speed, data is being cached
+- Reusability
+  - we can reuse spark code for batch-processing
+- Fault Tolerence
+  - Spark abstraction - RDD
+- Real time Stream Processing
+  - we can hadle real time stream processing easily
+- Lazy Evaluation
+  - it does not provide results directly, first a new RDD is formed
+- Support Multiple Languages
+  - R, Python, Java...
+- Spark GraphX
+  - spark has graphx, which is a component for graph and graph-parallel computation
+
+
+RDD - Resilient Distributed Datasets
+- it's a fundamental data structure of spark
+- immutable distributed collection of objects
+- it is divided into logical partitions, which may be computed on different nodes of cluster
+
+2 ways to create RDD
+- Parallelizing
+- Referencing a dataset in an external storage system
+
+DAG - Dircted Acyclic Graph
+- Vertices - RDD
+- Edge  - Operations to be performed on RDD
+
+DAG submits to DAG Scheduler - it further splits the graph into stages of task
+
+- we will have finite number of vertices and edges, where each edge directed from one vertex to another. It contains a sequence of vertices such that every edge is directed from earlier to later in the sequence.
+
+- DAG Scheduler splits the Spark RDD into stages.
+- Each stage is comprised of tasks,based on partitions of RDD
+
+Working of DAG
+- interpreter is the first layer, it uses scala interpreter
+- spark creates an operator graph
+- when we call an action on spark RDD, Spark submits the operator graph to DAG Scheduler
+- it divides the operators into stages of task in DAG Scheduler
+- stage will contain task based on partition of input data
+- stages are passed on to Task Scheduler
+- workers execute the task on slave machine
+
+
+
+
+
+
+
+
+
+
+
+
+

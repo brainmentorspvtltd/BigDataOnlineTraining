@@ -1,0 +1,59 @@
+Microsoft Windows [Version 10.0.19042.928]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ASUS PC>spark-shell
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Spark context Web UI available at http://DESKTOP-PFDLSUB:4040
+Spark context available as 'sc' (master = local[*], app id = local-1620490688903).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.1.1
+      /_/
+
+Using Scala version 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_281)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> 21/05/08 21:48:20 WARN ProcfsMetricsGetter: Exception when trying to compute pagesize, as a result reporting of ProcessTree metrics is stopped
+
+
+scala>
+
+scala> val file = sc.textFile("F:/count_vehciles.txt")
+file: org.apache.spark.rdd.RDD[String] = F:/count_vehciles.txt MapPartitionsRDD[1] at textFile at <console>:24
+
+scala> val count = file.flatMap(line => line.split(",")).map(word => (word,1)).reduceByKey(_+_
+);
+count: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[4] at reduceByKey at <console>:25
+
+scala> count
+count   countDistinct
+
+scala> count.toDebugString
+res0: String =
+(2) ShuffledRDD[4] at reduceByKey at <console>:25 []
+ +-(2) MapPartitionsRDD[3] at map at <console>:25 []
+    |  MapPartitionsRDD[2] at flatMap at <console>:25 []
+    |  F:/count_vehciles.txt MapPartitionsRDD[1] at textFile at <console>:24 []
+    |  F:/count_vehciles.txt HadoopRDD[0] at textFile at <console>:24 []
+
+scala> count.saveAsTextFile("count_output")
+
+scala> val numbers = Array(12,14,15,35,56,89)
+numbers: Array[Int] = Array(12, 14, 15, 35, 56, 89)
+
+scala> val x = sc.parallelize(numbers)
+x: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[6] at parallelize at <console>:26
+
+scala> file
+res2: org.apache.spark.rdd.RDD[String] = F:/count_vehciles.txt MapPartitionsRDD[1] at textFile at <console>:24
+
+scala> var newRdd = numbers.map(file => (file * 2))
+newRdd: Array[Int] = Array(24, 28, 30, 70, 112, 178)
+
+scala>
